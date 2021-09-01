@@ -129,7 +129,16 @@ public class Device extends CordovaPlugin {
     }
 
     public String getSerialNumber() {
-        String serial = android.os.Build.SERIAL;
+		String serial;
+        int sdk_int = android.os.Build.VERSION.SDK_INT;
+        if (sdk_int < 26) {
+          serial = android.os.Build.SERIAL;
+        }
+        else {
+          serial = android.os.Build.getSerial();
+        }
+		
+		
         return serial;
     }
 
